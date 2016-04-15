@@ -10,7 +10,8 @@ var morgan   = require('morgan');
 // load models
 var User     = require('./models/user.js');
 var Basket   = require('./models/basket.js');
-var singleton = require('./models/singleton.js');
+var Singleton = require('./models/singleton.js');
+var Facade   = require('./models/facade-pattern.js');
 // configuration ===============================================================
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
@@ -30,11 +31,9 @@ console.log(alex.privateVar);
 console.log(alex.getPrivateVar());
 
 //Test singleton pattern
-
 // Usage:
-
-var singleA = singleton.getInstance();
-var singleB = singleton.getInstance();
+var singleA = Singleton.getInstance();
+var singleB = Singleton.getInstance();
 console.log( singleA.getRandomNumber() === singleB.getRandomNumber() ); // true
 
 //Basket module
@@ -50,6 +49,9 @@ Basket.addItem({
 
 console.log( Basket.getItemCount() );
 console.log( Basket.getTotal() );
+
+//Facade pattern
+var facade = Facade.facadeMethod({run: true, val: 10});
 
 // launch ======================================================================
 app.listen(port);
