@@ -9,7 +9,6 @@ var Basket = (function () {
   function privateFunction() {
     //...
   }
-
   // Return an object exposed to the public
   return {
 
@@ -17,7 +16,6 @@ var Basket = (function () {
     addItem: function( values ) {
       basket.push(values);
     },
-
     // Get the count of items in the basket
     getItemCount: function () {
       return basket.length;

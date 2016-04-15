@@ -10,8 +10,12 @@ var morgan   = require('morgan');
 // load models
 var User     = require('./models/user.js');
 var Basket   = require('./models/basket.js');
-var Singleton = require('./models/singleton.js');
-var Facade   = require('./models/facade-pattern.js');
+
+// patterns example
+var Singleton = require('./models/singleton-pattern.js');
+var Facade    = require('./models/facade-pattern.js');
+var Factory   = require('./models/factory-pattern.js');
+
 // configuration ===============================================================
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
@@ -52,6 +56,18 @@ console.log( Basket.getTotal() );
 
 //Facade pattern
 var facade = Facade.facadeMethod({run: true, val: 10});
+
+//Factory pattern
+// Create an instance of our factory that makes cars
+var carFactory = new Factory();
+var car = carFactory.createVehicle( {
+           vehicleType: "car",
+           color: "yellow",
+           doors: 6 } );
+
+// Test to confirm our car was created using the vehicleClass/prototype Car
+// Outputs: constructor for car
+console.log(car.constructor);
 
 // launch ======================================================================
 app.listen(port);
