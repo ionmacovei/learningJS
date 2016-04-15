@@ -10,11 +10,13 @@ var morgan   = require('morgan');
 // load models
 var User     = require('./models/user.js');
 var Basket   = require('./models/basket.js');
+var MacBook  = require('./models/macbook.js');
 
 // patterns example
 var Singleton = require('./models/singleton-pattern.js');
 var Facade    = require('./models/facade-pattern.js');
 var Factory   = require('./models/factory-pattern.js');
+var MacBookDecorator = require('./models/decorator-pattern.js');
 
 // configuration ===============================================================
 // set up our express application
@@ -68,6 +70,18 @@ var car = carFactory.createVehicle( {
 // Test to confirm our car was created using the vehicleClass/prototype Car
 // Outputs: constructor for car
 console.log(car.constructor);
+
+//Decorator pattern
+var macbook = new MacBook();
+MacBookDecorator.memory( macbook );
+MacBookDecorator.engraving( macbook );
+MacBookDecorator.insurance( macbook );
+
+// Outputs: 1522
+console.log( macbook.cost() );
+
+// Outputs: 11.6
+console.log( macbook.screenSize() );
 
 // launch ======================================================================
 app.listen(port);
