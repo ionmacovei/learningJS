@@ -2,25 +2,49 @@
 
 // create Singleton model ===========================================================
 
-//private variables
-var privateProperty = 'I am private';
-var numberOfCalls = 0
-//private function
-function sum(num1, num2) {
-  return num1 + num2;
-}
+var mySingleton = (function () {
 
-// Public
-var self = module.exports = {
+  // Instance stores a reference to the Singleton
+  var instance;
 
-  publicProperty: 'I am public',
+  function init() {
 
-  addFive: function addFive(num) {
-    numberOfCalls += 1;
-    return sum(num, 5);
-  },
+    // Singleton
 
-  numberOfCalls: function() {
-    return numberOfCalls;
-  }
-};
+    // Private methods and variables
+    function privateMethod(){
+        console.log( "I am private" );
+    }
+
+    var privateVariable = "Im also private";
+    var privateRandomNumber = Math.random();
+
+    return {
+      // Public methods and variables
+      publicMethod: function () {
+        console.log( "The public can see me!" );
+      },
+
+      publicProperty: "I am also public",
+
+      getRandomNumber: function() {
+        return privateRandomNumber;
+      }
+    };
+  };
+
+  return {
+    // Get the Singleton instance if one exists
+    // or create one if it doesn't
+    getInstance: function () {
+
+      if ( !instance ) {
+        instance = init();
+      }
+      return instance;
+    }
+  };
+  
+})();
+
+module.exports = mySingleton;

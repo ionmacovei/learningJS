@@ -9,7 +9,8 @@ var morgan   = require('morgan');
 
 // load models
 var User     = require('./models/user.js');
-
+var Basket   = require('./models/basket.js');
+var singleton = require('./models/singleton.js');
 // configuration ===============================================================
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
@@ -30,16 +31,25 @@ console.log(alex.getPrivateVar());
 
 //Test singleton pattern
 
-var singleton = require('./models/singleton.js');
-console.log(singleton.addFive(5));
-console.log(singleton.addFive(5));
-console.log(singleton.numberOfCalls());
+// Usage:
 
-var anotherSingleton = require('./models/singleton.js');
-console.log(anotherSingleton.addFive(50));
-console.log(anotherSingleton.numberOfCalls());
+var singleA = singleton.getInstance();
+var singleB = singleton.getInstance();
+console.log( singleA.getRandomNumber() === singleB.getRandomNumber() ); // true
 
+//Basket module
+Basket.addItem({
+  item: "iBeacon Pro",
+  price: 20
+});
 
+Basket.addItem({
+  item: "iBeacon Simple",
+  price: 10
+});
+
+console.log( Basket.getItemCount() );
+console.log( Basket.getTotal() );
 
 // launch ======================================================================
 app.listen(port);
